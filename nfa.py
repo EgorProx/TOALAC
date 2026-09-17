@@ -51,14 +51,15 @@ class NFA:
 
 
 def build_nfa_a_or_b_star_a_star():
-    '''Строит НКА на 2 состояниях.'''
-    states = ["q0", "q1"]
+    '''Строит НКА на 3 состояниях с настоящей недетерминированностью: из q0 по символу a есть два разных перехода сразу (в q1 и в q2).'''
+    states = ["q0", "q1", "q2"]
     alphabet = ("a", "b")
     table = {
-        "q0": {"a": {"q1"}, "b": {"q0"}},
+        "q0": {"a": {"q1", "q2"}, "b": {"q0"}},
         "q1": {"a": {"q1"}},
+        "q2": {"a": {"q2"}},
     }
-    return NFA(states, alphabet, table, "q0", {"q0", "q1"})
+    return NFA(states, alphabet, table, "q0", {"q0", "q1", "q2"})
 
 
 def read_ab_word(raw):
